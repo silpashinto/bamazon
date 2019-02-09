@@ -84,6 +84,24 @@ var COMMON = function () {
 
         });
     }
+
+    //Function to insert data into department table
+    this.insertDepartment = function (department_name, over_head_cost) {
+
+        var query = connection.query(
+            "INSERT INTO departments SET ?",
+            {
+                department_name: department_name,
+                over_head_costs: over_head_cost
+            },
+            function (err, res) {
+
+                console.log('\n THANK YOU!!! NEW DEPARTMENT CREATED\n--------------------------\n');
+
+            });
+
+        connection.end();
+    };
 }
 
 module.exports = COMMON;

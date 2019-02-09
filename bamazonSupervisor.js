@@ -46,12 +46,12 @@ function init() {
 
 function viewProductsale() {
 
-    var query = 'SELECT d.department_id, d.department_name, d.over_head_costs, SUM(p.product_sales) as product_sales,d.over_head_costs - SUM(p.product_sales) as total_profit from departments d JOIN products p WHERE d.department_name = p.department_name GROUP BY p.department_name';
+    var query = 'SELECT d.department_id, d.department_name, d.over_head_costs, SUM(p.product_sales) as product_sales,SUM(p.product_sales) - (d.over_head_costs)  as total_profit from departments d JOIN products p WHERE d.department_name = p.department_name GROUP BY p.department_name';
 
     connection.query(query, function (err, res) {
 
         if (res.length > 0) {
-            
+
             var values = [];
             for (var i = 0; i < res.length; i++) {
 
@@ -59,8 +59,8 @@ function viewProductsale() {
                     res[i].department_id, res[i].department_name, res[i].over_head_costs, res[i].product_sales, res[i].total_profit
                 ]);
             }
-            console.table(['department_id', 'department_name', 'over_head_costs','product_sales','total_profit'], values);
-         }
+            console.table(['department_id', 'department_name', 'over_head_costs', 'product_sales', 'total_profit'], values);
+        }
         else
             console.log('\n Nothig to ShoW!!! \n');
     });
@@ -68,5 +68,32 @@ function viewProductsale() {
     connection.end();
 }
 function createNewDept() {
-    connection.end();
+
+    inquirer
+        .prompt([
+
+            {
+                type: "input",
+                message: "Enter Department Name:",
+                name: "deptname"
+
+            },
+            {
+                type: "input",
+                message: "Enter Over Head Cost Amount:",
+                name: "over_head_cost",
+                validate: function (value) {
+                    if (isNaN(value) === false) {
+                        return true;
+                    }
+                    return false;
+                }
+
+            }])
+        .then(function (response) {
+
+            common.insertDepartment(response.deptname, response.over_head_cost);
+
+        });
+
 }

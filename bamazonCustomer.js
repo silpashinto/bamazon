@@ -154,7 +154,7 @@ function placeTheOrder(itemId, units) {
             console.log("ERROR : ", err);
         else {
             //checking for availability
-            if (data.stock_quantity > units) {
+            if (data.stock_quantity >= units) {
 
                 var updatedStockQuantity = parseInt(data.stock_quantity) - parseInt(units);
                 var toatalPrice = data.price * units;
