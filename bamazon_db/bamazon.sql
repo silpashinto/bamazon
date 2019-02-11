@@ -13,11 +13,12 @@ product_sales DECIMAL(11,4) NULL,
 primary key(item_id)
 );
 
-insert into products(product_name,department_name,price,stock_quantity) 
+insert into products(product_name,department_name,price,stock_quantity,product_sales) 
 value('Digital Slow Cooker','Appliances',49.99,400,1300),
 ('Electric Griddle','Appliances',59.99,500,1200),
 ('Food Processor','Appliances',99.34,350,1000),
 ('Waffle Maker','Appliances',19.84,450,1000);
+
 insert into products(product_name,department_name,price,stock_quantity) 
 value('Microwave Oven','Appliances',77.97,300),
 ('Refrigerator','Appliances',1799,40);
@@ -32,5 +33,11 @@ over_head_costs DECIMAL(11,4) not NULL,
 primary key(department_id)
 );
 
-insert into departments(department_name,over_head_costs) value('Appliances',10000);
+insert into departments(department_name,over_head_costs) value
+('Clothing',12000);
 select * from departments;
+
+SELECT department_name FROM departments;
+select d.department_id, d.department_name, d.over_head_costs, sum(p.product_sales) as prodruct_sales,  
+d.over_head_costs - sum(p.product_sales) as total
+from departments d join products p where d.department_name = p.department_name group by p.department_name;

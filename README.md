@@ -1,6 +1,5 @@
-# bamazon
-
-# READ ME Before:
+# BAMAZON
+## READ ME Before:
 
 This Bamazon is an Application that accepts the orders from customers and it maintains the inventory by depleting the ordered item from the store's inventory. It keeps track of the product sales across various departments of the store and then provide a summary of the highest-grossing departments in the store.
 
@@ -46,4 +45,4 @@ Create New Department
 When a supervisor selects View Product Sales by Department, the App displays a summarized table in their terminal/bash window listing the Total profit of each Department. (The total_profit column is calculated on the fly as the difference between over_head_costs and product_sales and total_profit uses a custom alias and is not stored in any database)
 Supervisor can also Add a New Department to the store.
 
-Please see the below link to the Test Results.
+[link to App Demo!](https://youtu.be/c9X4rsdkgpw)
